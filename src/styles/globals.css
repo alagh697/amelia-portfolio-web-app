@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  @font-face {
+    font-family: 'ClashDisplay';
+    src: url('/fonts/ClashDisplay-Regular.otf') format('woff');
+    font-weight: 500;
+    font-style: normal;
+  }
+}
+
+@layer components {
+  .nav-link{
+    @apply text-lg font-semibold hover:text-amelia-green
+  }
+
+  .cta{
+    @apply px-6 py-2 text-lg font-medium border border-white 
+    hover:border-amelia-green hover:text-amelia-green active:scale-95
+  }
+
+  .service-title{
+    @apply text-4xl uppercase font-black flex-shrink-0 ml-9
+  }
+}
