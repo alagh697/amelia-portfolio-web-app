@@ -26,3 +26,47 @@
     @apply text-4xl uppercase font-black flex-shrink-0 ml-9
   }
 }
+
+/* Animation */
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.service-slider {
+  display: flex;
+  flex-direction: row;
+  animation: 10s slide infinite linear;
+}
+
+@media screen and (min-width: 1200px) {
+  .service:hover .service-slider {
+    animation-play-state: paused;
+  }
+  }
+
+
+.service:before,
+.service:after {
+  position: absolute;
+  top: 0;
+  width: 150px;
+  height: 100%;
+  content: "";
+  z-index: 2;
+}
+
+.service:before {
+  left: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), green);
+}
+
+.service:after {
+  right: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), green);
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import HomePagePortfolioListItem from './HomePagePortfolioListItem'
+import HomePageServiceList from './HomePageServiceList'
 
 function HomePagePortfolioSection() {
   return (
@@ -48,6 +49,15 @@ function HomePagePortfolioSection() {
         <HomePagePortfolioListItem/>
         <HomePagePortfolioListItem/>
       </ul>
+
+      <div
+      className='z-20 scale-110 flex w-full  bg-amelia-green text-black 
+      whitespace-nowrap service
+      '
+      >
+        <HomePageServiceList/>
+        <HomePageServiceList/>
+      </div>
     </section>
   )
 }
