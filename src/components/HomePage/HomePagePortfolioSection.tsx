@@ -1,10 +1,61 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useRef } from 'react'
 import HomePagePortfolioListItem from './HomePagePortfolioListItem'
 import HomePageServiceList from './HomePageServiceList'
 
 function HomePagePortfolioSection() {
+  const portfolioRef = useRef<any>(null);
+  const isInverted = useRef(false);
+  const observerRef = useRef<IntersectionObserver>();
+
+  useEffect(() => {
+      const portfolioSection = portfolioRef.current;
+
+      if (!portfolioSection) return;
+
+      const handleScroll = (e: WheelEvent) => {
+          if (!isInverted.current) return;
+
+          const maxScrollLeft = portfolioSection.scrollWidth - portfolioSection.clientWidth;
+
+          // Prevent the default vertical scroll behavior
+          e.preventDefault();
+
+          // Scroll horizontally instead
+          portfolioSection.scrollLeft += e.deltaY;
+
+          // Check if the user has scrolled past the end or beginning
+          if (portfolioSection.scrollLeft <= 0 || portfolioSection.scrollLeft >= maxScrollLeft) {
+              isInverted.current = false;
+          }
+      };
+
+      observerRef.current = new IntersectionObserver(
+          (entries) => {
+              entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                      isInverted.current = true;
+                  } else {
+                      isInverted.current = false;
+                  }
+              });
+          },
+          { threshold: 0.1 } // Adjust this threshold as needed
+      );
+
+      observerRef.current.observe(portfolioSection);
+      portfolioSection.addEventListener('wheel', handleScroll);
+
+      // Cleanup the event listener and observer on unmount
+      return () => {
+          portfolioSection.removeEventListener('wheel', handleScroll);
+          observerRef.current?.unobserve(portfolioSection);
+      };
+  }, []);
+
   return (
     <section
+    
     className="bg-[#111111] w-full py-14 overflow-hidden
     flex flex-col gap-12
     "
@@ -40,7 +91,8 @@ function HomePagePortfolioSection() {
 
       {/* Project list */}
       <ul
-      className='carousel flex gap-3 '
+      ref={portfolioRef}
+      className=' flex gap-3 overflow-hidden whitespace-nowrap items-center h-[80vh]'
       >
         <HomePagePortfolioListItem/>
         <HomePagePortfolioListItem/>
