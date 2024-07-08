@@ -3,7 +3,9 @@ import HomePageServiceList from './HomePageServiceList'
 
 function HomePageServiceSliders() {
   return (
-    <section className="relative w-full py-20 overflow-hidden">
+    <section 
+    id={'service-slider'}
+    className="relative w-full py-20 overflow-hidden">
       
 
       <div

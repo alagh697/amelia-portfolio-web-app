@@ -25,6 +25,10 @@
   .service-title{
     @apply text-4xl uppercase font-black flex-shrink-0 ml-9
   }
+
+  .hover-effect{
+    @apply transform ease-in-out duration-300
+  }
 }
 
 /* Animation */
